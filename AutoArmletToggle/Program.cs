@@ -82,19 +82,19 @@ namespace Snatcher
         {
             var tick = Environment.TickCount;
             var myhero = ObjectMgr.LocalHero;
-            var health = myhero.Health;
             var armlet = myhero.FindItem("item_armlet");
 
             if (myhero == null || tick < _sleeptick || !_enabled || myhero.ClassID != ClassID.CDOTA_Item_Armlet || tick < _sleeptick2)
                 return;
 
 
-            if ((myhero.Health - health) > 200)// If myhero's health decreased by 200 then turn armlet on
+            if ((health - myhero.Health) > 200)// If myhero's health decreased by 200 then turn armlet on
             {
                 armlet.UseAbility(hero);
                 _sleeptick2 = tick + 15000; // Check after 30 sec if myhero still losing health
                 return;
             }
+            var health = myhero.Health;
 
             else if(myhero.Health == health)
             {

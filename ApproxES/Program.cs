@@ -79,7 +79,7 @@ namespace ApproxES
             var cheese = me.FindItem("item_cheese");
             var veilofdiscord = me.FindItem("item_veil_of_discord");
             var range = Q.CastRange;
-            var halfhealth = me.MaximumHealth/2;           
+            var halfhealth = me.MaximumHealth / 2;
 
             var enemyHeroes = ObjectMgr.GetEntities<Hero>().Where(e => e.Team != me.Team && e.IsAlive && e.IsVisible && !e.IsIllusion && !e.UnitState.HasFlag(UnitState.MagicImmune) &&
                    e.ClassID != ClassID.CDOTA_Unit_Hero_Beastmaster_Hawk &&
@@ -90,28 +90,30 @@ namespace ApproxES
                    e.ClassID != ClassID.CDOTA_Unit_Brewmaster_PrimalStorm &&
                    e.ClassID != ClassID.CDOTA_Unit_Undying_Tombstone &&
                    e.ClassID != ClassID.CDOTA_Unit_Undying_Zombie &&
-                   e.ClassID != ClassID.CDOTA_Ability_Juggernaut_HealingWard).ToList();          
+                   e.ClassID != ClassID.CDOTA_Ability_Juggernaut_HealingWard).ToList();
 
             if (rangeDisplay == null)
             {
-                range = Q.CastRange;
                 rangeDisplay = me.AddParticleEffect(@"particles\ui_mouseactions\range_display.vpcf");
+                range = Q.CastRange;
                 rangeDisplay.SetControlPoint(1, new Vector3(range, 0, 0));
             }
             else
             {
-                range = Q.CastRange;
-                rangeDisplay.Dispose();
-                rangeDisplay = me.AddParticleEffect(@"particles\ui_mouseactions\range_display.vpcf");
-                rangeDisplay.SetControlPoint(1, new Vector3(range, 0, 0));
+                if (range != Q.CastRange)
+                {
+                    range = Q.CastRange;
+                    rangeDisplay.Dispose();
+                    rangeDisplay = me.AddParticleEffect(@"particles\ui_mouseactions\range_display.vpcf");
+                    rangeDisplay.SetControlPoint(1, new Vector3(range, 0, 0));
+                }
             }
-            
 
             if (activated && toggle)
             {
                 var target = me.ClosestToMouseTarget(2000);
-                var ehalfhealth = target.MaximumHealth / 2; 
-                var thalfhealth = target.MaximumHealth / 3; 
+                var ehalfhealth = target.MaximumHealth / 2;
+                var thalfhealth = target.MaximumHealth / 3;
                 if (target.IsAlive && !target.IsInvul())
                 {
                     if (target != null && target.IsAlive && target.IsVisible && me.Distance2D(target) <= 1200 && !target.IsIllusion)
@@ -124,7 +126,7 @@ namespace ApproxES
                         {
                             blink.UseAbility(target.Position);
                             Utils.Sleep(250, "blink");
-                            me.Attack(target); 
+                            me.Attack(target);
                         }
                         if (R.CanBeCasted() &&
                             me.Position.Distance2D(target.Position) < 575 &&
@@ -136,7 +138,7 @@ namespace ApproxES
                                 R.UseAbility();
                                 me.Attack(target);
                             }
-                        }                                               
+                        }
                         if (W.CanBeCasted() &&
                             blink.CanBeCasted() &&
                             me.Position.Distance2D(target.Position) > 300 &&

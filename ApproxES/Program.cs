@@ -78,7 +78,7 @@ namespace ApproxES
             var stick = me.FindItem("item_magic_stick");
             var cheese = me.FindItem("item_cheese");
             var veilofdiscord = me.FindItem("item_veil_of_discord");
-            var range = Q.CastRange;
+            var range = 1400;
             var halfhealth = me.MaximumHealth/2;           
 
             var enemyHeroes = ObjectMgr.GetEntities<Hero>().Where(e => e.Team != me.Team && e.IsAlive && e.IsVisible && !e.IsIllusion && !e.UnitState.HasFlag(UnitState.MagicImmune) &&

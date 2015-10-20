@@ -95,19 +95,15 @@ namespace ApproxES
             if (rangeDisplay == null)
             {
                 rangeDisplay = me.AddParticleEffect(@"particles\ui_mouseactions\range_display.vpcf");
-                range = Q.CastRange;
                 rangeDisplay.SetControlPoint(1, new Vector3(range, 0, 0));
             }
             else
             {
-                if (range != Q.CastRange)
-                {
-                    range = Q.CastRange;
-                    rangeDisplay.Dispose();
-                    rangeDisplay = me.AddParticleEffect(@"particles\ui_mouseactions\range_display.vpcf");
-                    rangeDisplay.SetControlPoint(1, new Vector3(range, 0, 0));
-                }
+                rangeDisplay.Dispose();
+                rangeDisplay = me.AddParticleEffect(@"particles\ui_mouseactions\range_display.vpcf");
+                rangeDisplay.SetControlPoint(1, new Vector3(range, 0, 0));
             }
+            
 
             if (activated && toggle)
             {

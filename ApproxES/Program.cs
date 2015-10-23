@@ -68,9 +68,6 @@ namespace ApproxES
             }
 
             var blink = me.FindItem("item_blink");
-            var W = me.Spellbook.SpellW;
-            var R = me.Spellbook.SpellR;
-            var Q = me.Spellbook.SpellQ;
             var dagon = me.GetDagon();
             var shiva = me.FindItem("item_shivas_guard");
             var arcane = me.FindItem("item_arcane_boots");
